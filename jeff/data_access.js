@@ -56,11 +56,9 @@ module.exports.call = async function call(operation, parameters, callback) {
       break;
 
     case "findplanet":
-      console.log(parser);
       const planet = await db
         .collection(collectionPlanets)
         .findOne({ id: parser });
-      console.log(planet);
       callback({ planet: planet });
       break;
 
@@ -92,7 +90,7 @@ module.exports.call = async function call(operation, parameters, callback) {
     //     .find({ homeworld: parseInt(parameters.id) });
       const plancharacters = await db
         .collection(collectionCharacters)
-        .find({ plancharacters: parseInt(parameters.id) })
+        .find({ homeworld: parseInt(parameters.id) })
         .toArray();
       callback({ plancharacters: plancharacters });
 
@@ -101,6 +99,7 @@ module.exports.call = async function call(operation, parameters, callback) {
         .collection(collectionFilmPlanets)
         .find({ planet_id: parseInt(parameters.id) })
         .toArray();
+        console.log(filmplanets)
       callback({ filmplanets: filmplanets });
 
     default:
